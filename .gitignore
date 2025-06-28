@@ -1,0 +1,47 @@
+# === BACKEND (.NET Core) ===
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.db
+*.pdb
+
+# ASP.NET Core secrets
+secrets.json
+
+# Entity Framework Migrations (if using snapshots)
+**/Migrations/
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# === FRONTEND (React) ===
+node_modules/
+dist/
+build/
+
+# Vite
+.vite/
+
+# .env files
+.env
+.env.*.local
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# === GENERAL ===
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
