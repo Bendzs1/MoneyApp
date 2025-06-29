@@ -122,6 +122,26 @@ namespace Backend.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("UserSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BaseCurrency")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserSettings");
+                });
+
             modelBuilder.Entity("Backend.Models.Account", b =>
                 {
                     b.HasOne("Backend.Models.Provider", "Provider")
@@ -164,6 +184,17 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Models.User", "User")
                         .WithMany("Providers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("UserSettings", b =>
+                {
+                    b.HasOne("Backend.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

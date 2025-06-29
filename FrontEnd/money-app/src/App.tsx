@@ -4,8 +4,8 @@ import "./App.css";
 import Authorization from "./pages/Authorization";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import Main from "./pages/Main";
-import Layout from "./components/Layout";
+import Main from "./pages/dashboard/Main";
+import Layout from "./components/layout/Layout";
 
 function App() {
    return (

@@ -12,4 +12,5 @@ public class AppDbContext : DbContext
     public DbSet<Provider> Providers => Set<Provider>();
     public DbSet<Account> Accounts => Set<Account>();
     public DbSet<AccountBalance> Balances => Set<AccountBalance>();
+    public DbSet<UserSettings> UserSettings => Set<UserSettings>();
 }

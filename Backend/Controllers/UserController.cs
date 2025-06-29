@@ -44,9 +44,12 @@ public class UserController : ControllerBase
     {
         try
         {
+            //Verifys the username and password
             var result = await _userService.Verify(registerDto);
+
             if (result.Item1)
             {
+                //If the registration was succesfull it returns the token and the user
                 var token = _userService.GenerateJwtToken(result.Item2);
                 var response = new AuthResponseDto
                 {

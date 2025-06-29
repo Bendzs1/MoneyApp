@@ -4,7 +4,7 @@ import NavBar from "./Navbar";
 export default function Layout() {
    return (
       <div className="flex justify-center h-full">
-         <div className="min-h-[100vh] w-[80rem] overflow-hidden relative">
+         <div className="min-h-[100vh] w-[80rem] relative">
             <NavBar />
             {/* {Centered content area} */}
             <main className="py-16">

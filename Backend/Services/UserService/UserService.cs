@@ -14,11 +14,13 @@ namespace Backend.Services;
 public class UserService : IUSerService
 {
     IUserRepository _userRp;
+    IUserSettingsRepository _userSettingsRp;
     PasswordHasher<User> _hasher = new PasswordHasher<User>();
     readonly JwtSettings _jwtsettings;
 
-    public UserService(IUserRepository userRepository, IOptions<JwtSettings> jwtSettings)
+    public UserService(IUserRepository userRepository, IUserSettingsRepository userSettingsRepository, IOptions<JwtSettings> jwtSettings)
     {
+        _userSettingsRp = userSettingsRepository;
         _userRp = userRepository;
         _jwtsettings = jwtSettings.Value;
     }
@@ -26,11 +28,13 @@ public class UserService : IUSerService
     public async Task<User> Add(AuthDto dto)
     {
         if (dto.UserName.Length > 49)
-            throw new ArgumentException("The user name length must be less than 50!");
+            throw new ArgumentException("The username length must be less than 50 characters!");
         if (await _userRp.GetByUserName(dto.UserName) != null)
-            throw new ArgumentException("User name is already taken!");
+            throw new ArgumentException("Username is already taken!");
 
-        var user = new User(dto.UserName);
+        var userSettingModel = new UserSettings();
+        var userSetting = await _userSettingsRp.Add(userSettingModel);
+        var user = new User(dto.UserName, userSetting);
 
         //Only storing the hashed password.
         string hashedPassword = _hasher.HashPassword(user, dto.Password);
